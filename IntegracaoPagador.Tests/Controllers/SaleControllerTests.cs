@@ -5,6 +5,7 @@ using IntegracaoPagador.Models.Enums;
 using IntegracaoPagador.Tests.AutoFixture;
 using Ploeh.AutoFixture.Idioms;
 using System.Web.Mvc;
+using IntegracaoPagador.Service;
 using NSubstitute;
 using Xunit;
 
@@ -40,8 +41,9 @@ namespace IntegracaoPagador.Tests.Controllers
             ResponseRequest response)
         {
             model.TypeSend = TypeSendEnum.SOAP;
+            sut.SoapRequestService.AuthorizeTransactionSoap(model, Arg.Any<string>()).Returns(response);
 
-            sut.SoapRequestService.AuthorizeTransactionSoap(model, sut.CreateMercharOrderId()).Returns(response);
+            //sut.SoapRequestService.AuthorizeTransactionSoap(model, sut.CreateMercharOrderId()).Returns(response);
 
             var act = await sut.Authorize(model);
             var viewResult = act as ViewResult;
@@ -50,8 +52,9 @@ namespace IntegracaoPagador.Tests.Controllers
             viewResult.ViewName.ShouldBeEqualTo("Index");
             (viewResult.Model as ResponseRequest).ShouldNotBeNull();
 
+            (viewResult.Model as ResponseRequest).ShouldBeEqualTo(response);
 
-
+            //await sut.SoapRequestService.Received(1).AuthorizeTransactionSoap(model, Arg.Any<string>());
         }
     }
 }
