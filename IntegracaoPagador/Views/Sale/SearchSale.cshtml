@@ -1,0 +1,56 @@
+﻿@model IntegracaoPagador.Models.ResponseRest
+@{
+    ViewBag.Title = "SearchSale";
+}
+
+<h2>SearchSale</h2>
+
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <fieldset>
+            <legend> Customer </legend>
+            @Html.LabelFor(m => m.Customer.Name)
+            @Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control" })
+        </fieldset>
+    </div>
+    <div class="row">
+        <fieldset>
+            <legend> Payment </legend>
+            @Html.LabelFor(m => m.Payment.Type, "Payment Type:")
+            @Html.TextBoxFor(m => m.Payment.Type, new { @class = "form-control" })
+            
+            @Html.LabelFor(m => m.Payment.Amount, "Payment Amount:")
+            @Html.TextBoxFor(m => m.Payment.Amount, new { @class = "form-control" })
+            
+
+            @Html.LabelFor(m => m.Payment.Provider, "Payment Provider:")
+            @Html.EnumDropDownListFor(m => m.Payment.Provider, new { @class = "form-control" })
+            
+
+            @Html.LabelFor(m => m.Payment.Installments, "Payment Installments:")
+            @Html.TextBoxFor(m => m.Payment.Installments, new { @class = "form-control" })
+            
+        </fieldset>
+    </div>
+    <div class="row">
+        <fieldset>
+            <legend> CreditCardCar </legend>
+            @Html.LabelFor(m => m.Payment.CreditCard.CardNumber, "CreditCardCard Number:")
+            @Html.TextBoxFor(m => m.Payment.CreditCard.CardNumber, new { @class = "form-control" })
+           
+            @Html.LabelFor(m => m.Payment.CreditCard.Holder, "CreditCard Holder:")
+            @Html.TextBoxFor(m => m.Payment.CreditCard.Holder, new { @class = "form-control" })
+            
+
+            @Html.LabelFor(m => m.Payment.CreditCard.ExpirationDate, "CreditCard ExpirationDate:")
+            @Html.TextBoxFor(m => m.Payment.CreditCard.ExpirationDate, new { @class = "form-control" })
+          
+
+            @Html.LabelFor(m => m.Payment.CreditCard.Brand, "CreditCardBrand:")
+            @Html.EnumDropDownListFor(m => m.Payment.CreditCard.Brand, new { @class = "form-control" })
+
+        </fieldset>
+    </div>
+}

@@ -1,0 +1,72 @@
+﻿@model IntegracaoPagador.Models.SaleViewModel
+@{
+    ViewBag.Title = "SaleProduct";
+}
+
+<h2>Authorize</h2>
+
+@using (Html.BeginForm("Authorize", "Sale", FormMethod.Post))
+{
+    <div class="row">
+        <fieldset>
+            <legend> Customer </legend>
+            @Html.LabelFor(m => m.CustomerName, "Customer Name:")
+            @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.CustomerName)
+        </fieldset>
+    </div>
+    <div class="row">
+        <fieldset>
+            <legend> Payment </legend>
+            @Html.LabelFor(m => m.PaymentType, "Payment Type:")
+            @Html.TextBoxFor(m => m.PaymentType, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.PaymentType)
+        
+            @Html.LabelFor(m => m.PaymentAmount, "Payment Amount:")
+            @Html.TextBoxFor(m => m.PaymentAmount, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.PaymentAmount)
+
+            @Html.LabelFor(m => m.PaymentProvider, "Payment Provider:")
+            @Html.EnumDropDownListFor(m => m.PaymentProvider, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.PaymentProvider)
+
+            @Html.LabelFor(m => m.PaymentInstallments, "Payment Installments:")
+            @Html.TextBoxFor(m => m.PaymentInstallments, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.PaymentInstallments)
+        </fieldset>
+    </div>
+    <div class="row">
+        <fieldset>
+            <legend> CreditCardCar </legend>
+            @Html.LabelFor(m => m.CreditCardCardNumber, "CreditCardCard Number:")
+            @Html.TextBoxFor(m => m.CreditCardCardNumber, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.CreditCardCardNumber)
+
+            @Html.LabelFor(m => m.CreditCardHolder, "CreditCard Holder:")
+            @Html.TextBoxFor(m => m.CreditCardHolder, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.CreditCardHolder)
+
+            @Html.LabelFor(m => m.CreditCardExpirationDate, "CreditCard ExpirationDate:")
+            @Html.TextBoxFor(m => m.CreditCardExpirationDate, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.CreditCardExpirationDate)
+
+            @Html.LabelFor(m => m.CreditCardBrand, "CreditCardBrand:")
+            @Html.EnumDropDownListFor(m => m.CreditCardBrand, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.CreditCardBrand)
+
+            @Html.LabelFor(m => m.CreditCardSecurityCode, "CreditCard SecurityCode:")
+            @Html.TextBoxFor(m => m.CreditCardSecurityCode, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.CreditCardSecurityCode)
+
+        </fieldset>
+    </div>
+    <div class="row">
+        <fieldset>
+            @Html.LabelFor(m => m.TypeSend, "Type:")
+            @Html.EnumDropDownListFor(m => m.TypeSend, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.TypeSend)
+        </fieldset>
+    </div>
+
+    <input type="submit" value="Enviar" />
+}

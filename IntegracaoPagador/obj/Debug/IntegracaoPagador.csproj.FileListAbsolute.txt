@@ -1,0 +1,71 @@
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\IntegracaoPagador.dll.config
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\IntegracaoPagador.dll
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\IntegracaoPagador.pdb
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\Antlr3.Runtime.dll
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\Microsoft.AI.Agent.Intercept.dll
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\Microsoft.AI.DependencyCollector.dll
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\Microsoft.AI.PerfCounterCollector.dll
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\Microsoft.ApplicationInsights.dll
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\Microsoft.Web.Infrastructure.dll
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\Newtonsoft.Json.dll
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\System.Web.Helpers.dll
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\System.Web.Mvc.dll
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\System.Web.Optimization.dll
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\System.Web.Razor.dll
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\System.Web.WebPages.Deployment.dll
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\System.Web.WebPages.dll
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\System.Web.WebPages.Razor.dll
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\WebGrease.dll
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\System.Web.Helpers.xml
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\System.Web.Mvc.xml
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\System.Web.Optimization.xml
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\System.Web.Razor.xml
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\System.Web.WebPages.xml
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\System.Web.WebPages.Deployment.xml
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\System.Web.WebPages.Razor.xml
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\Antlr3.Runtime.pdb
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\Newtonsoft.Json.xml
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\Microsoft.ApplicationInsights.xml
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\bin\Microsoft.AI.DependencyCollector.xml
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\obj\Debug\IntegracaoPagador.csprojResolveAssemblyReference.cache
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\obj\Debug\IntegracaoPagador.dll
+c:\users\dsoares\onedrive - braspag tecnologia em pagamento ltda\documents\visual studio 2017\Projects\IntegracaoPagador\IntegracaoPagador\obj\Debug\IntegracaoPagador.pdb
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\IntegracaoPagador.dll.config
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\IntegracaoPagador.dll
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\IntegracaoPagador.pdb
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\Antlr3.Runtime.dll
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\Microsoft.AI.Agent.Intercept.dll
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\Microsoft.AI.DependencyCollector.dll
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\Microsoft.ApplicationInsights.dll
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\Microsoft.Web.Infrastructure.dll
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\Newtonsoft.Json.dll
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\System.Web.Helpers.dll
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\System.Web.Mvc.dll
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\System.Web.Optimization.dll
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\System.Web.Razor.dll
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\System.Web.WebPages.Deployment.dll
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\System.Web.WebPages.dll
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\System.Web.WebPages.Razor.dll
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\WebGrease.dll
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\System.Web.Helpers.xml
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\System.Web.Mvc.xml
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\System.Web.Optimization.xml
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\System.Web.Razor.xml
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\System.Web.WebPages.xml
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\System.Web.WebPages.Deployment.xml
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\System.Web.WebPages.Razor.xml
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\Antlr3.Runtime.pdb
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\Newtonsoft.Json.xml
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\Microsoft.ApplicationInsights.xml
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\Microsoft.AI.DependencyCollector.xml
+C:\TFS\IntegracaoPagador\IntegracaoPagador\obj\Debug\IntegracaoPagador.csprojResolveAssemblyReference.cache
+C:\TFS\IntegracaoPagador\IntegracaoPagador\obj\Debug\IntegracaoPagador.dll
+C:\TFS\IntegracaoPagador\IntegracaoPagador\obj\Debug\IntegracaoPagador.pdb
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\AutoMapper.dll
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\AutoMapper.xml
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\AutoMapper.Net4.dll
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\System.Net.Http.Formatting.dll
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\System.Net.Http.Formatting.xml
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\Ninject.dll
+C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\Ninject.xml

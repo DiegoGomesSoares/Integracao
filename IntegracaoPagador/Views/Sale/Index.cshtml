@@ -1,0 +1,33 @@
+﻿@model IntegracaoPagador.Models.ResponseRequest
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="row">
+    @Html.ActionLink("SaleProduct", "SaleProduct")
+</div>
+
+@using (Html.BeginForm("Search", "Sale", FormMethod.Post))
+{
+    <div class="row">
+        <fieldset>
+            <div class="col-sm-6">
+                @Html.LabelFor(m => m.PaymentId, "Id")
+                @Html.TextBoxFor(m => m.PaymentId, new { @class="form-control"})
+            </div>
+        </fieldset>
+        <fieldset>
+            <div class="col-sm-6">
+                @Html.LabelFor(m => m.TypeSend, "Type:")
+                @Html.EnumDropDownListFor(m => m.TypeSend, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.TypeSend)
+            </div>
+        </fieldset>
+        
+        
+    </div>
+
+    <input type="submit" value="Buscar" />
+}

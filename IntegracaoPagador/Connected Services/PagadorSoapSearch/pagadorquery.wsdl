@@ -1,0 +1,790 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="https://www.pagador.com.br/query/pagadorquery" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="https://www.pagador.com.br/query/pagadorquery" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This webservice returns PAGADOR informations</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="https://www.pagador.com.br/query/pagadorquery">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="GetOrderData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="orderDataRequest" type="tns:OrderDataRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="OrderDataRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AbstractRequest">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="MerchantId" type="s1:guid" />
+              <s:element minOccurs="1" maxOccurs="1" name="BraspagOrderId" type="s1:guid" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="AbstractRequest" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RequestId" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="Version" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetOrderDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrderDataResult" type="tns:OrderDataResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="OrderDataResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AbstractResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="TransactionDataCollection" type="tns:ArrayOfOrderTransactionDataResponse" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="AbstractResponse" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CorrelationId" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorReportDataCollection" type="tns:ArrayOfErrorReportDataResponse" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfErrorReportDataResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ErrorReportDataResponse" nillable="true" type="tns:ErrorReportDataResponse" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ErrorReportDataResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfOrderTransactionDataResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OrderTransactionDataResponse" nillable="true" type="tns:OrderTransactionDataResponse" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OrderTransactionDataResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="BraspagTransactionId" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrderId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AcquirerTransactionId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PaymentMethod" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="PaymentMethodName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="AuthorizationCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumberOfPayments" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="Currency" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TransactionType" nillable="true" type="s:unsignedByte" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:unsignedByte" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReceivedDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CapturedDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VoidedDate" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CreditCardToken" nillable="true" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProofOfSale" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MaskedCardNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CapturedAmount" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VoidedAmount" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IpAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VelocityAnalysis" type="tns:VelocityAnalysis" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="VelocityAnalysis">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResultMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Score" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RejectReasons" type="tns:ArrayOfRejectReason" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfRejectReason">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RejectReason" nillable="true" type="tns:RejectReason" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RejectReason">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RuleId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetTransactionData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="transactionDataRequest" type="tns:TransactionDataRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="TransactionDataRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AbstractRequest">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="MerchantId" type="s1:guid" />
+              <s:element minOccurs="1" maxOccurs="1" name="BraspagTransactionId" type="s1:guid" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetTransactionDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTransactionDataResult" type="tns:TransactionDataResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="TransactionDataResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AbstractResponse">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="BraspagTransactionId" type="s1:guid" />
+              <s:element minOccurs="0" maxOccurs="1" name="OrderId" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="AcquirerTransactionId" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PaymentMethod" type="s:short" />
+              <s:element minOccurs="0" maxOccurs="1" name="PaymentMethodName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ErrorCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:long" />
+              <s:element minOccurs="0" maxOccurs="1" name="AuthorizationCode" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumberOfPayments" type="s:short" />
+              <s:element minOccurs="0" maxOccurs="1" name="Currency" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="TransactionType" nillable="true" type="s:unsignedByte" />
+              <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:unsignedByte" />
+              <s:element minOccurs="0" maxOccurs="1" name="ReceivedDate" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CapturedDate" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="VoidedDate" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="CreditCardToken" nillable="true" type="s1:guid" />
+              <s:element minOccurs="0" maxOccurs="1" name="ProofOfSale" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="MaskedCardNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CapturedAmount" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="VoidedAmount" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="VoidReason" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IpAddress" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="VelocityAnalysis" type="tns:VelocityAnalysis" />
+              <s:element minOccurs="0" maxOccurs="1" name="Refunds" type="tns:ArrayOfRefund" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfRefund">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Refund" nillable="true" type="tns:Refund" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Refund">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:unsignedByte" />
+          <s:element minOccurs="0" maxOccurs="1" name="Reason" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReceivedDate" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCustomerData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customerDataRequest" type="tns:CustomerDataRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CustomerDataRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AbstractRequest">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="MerchantId" type="s1:guid" />
+              <s:element minOccurs="1" maxOccurs="1" name="BraspagOrderId" type="s1:guid" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetCustomerDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCustomerDataResult" type="tns:CustomerDataResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CustomerDataResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AbstractResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CustomerIdentity" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CustomerName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CustomerEmail" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Street" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Complement" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="District" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ZipCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetCreditCardData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="creditCardDataRequest" type="tns:CreditCardDataRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CreditCardDataRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AbstractRequest">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="MerchantId" type="s1:guid" />
+              <s:element minOccurs="1" maxOccurs="1" name="BraspagTransactionId" type="s1:guid" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetCreditCardDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCreditCardDataResult" type="tns:CreditCardDataResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CreditCardDataResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AbstractResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CardHolder" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CardNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CardExpirationDate" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetAdditionalData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="additionalDataRequest" type="tns:AdditionalDataRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AdditionalDataRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AbstractRequest">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="MerchantId" type="s1:guid" />
+              <s:element minOccurs="1" maxOccurs="1" name="BraspagTransactionId" type="s1:guid" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetAdditionalDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAdditionalDataResult" type="tns:AdditionalDataResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AdditionalDataResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AbstractResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="AdditionalDataCollection" type="tns:ArrayOfAdditionalTransactionDataResponse" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfAdditionalTransactionDataResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AdditionalTransactionDataResponse" nillable="true" type="tns:AdditionalTransactionDataResponse" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AdditionalTransactionDataResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AbstractResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetDeliveryAddressData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="addressDataRequest" type="tns:DeliveryAddressDataRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="DeliveryAddressDataRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AbstractRequest">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="MerchantId" type="s1:guid" />
+              <s:element minOccurs="1" maxOccurs="1" name="BraspagOrderId" type="s1:guid" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetDeliveryAddressDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDeliveryAddressDataResult" type="tns:DeliveryAddressDataResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="DeliveryAddressDataResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AbstractResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Street" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Complement" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="District" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ZipCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetBoletoData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="boletoDataRequest" type="tns:BoletoDataRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BoletoDataRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AbstractRequest">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="MerchantId" type="s1:guid" />
+              <s:element minOccurs="1" maxOccurs="1" name="BraspagTransactionId" type="s1:guid" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetBoletoDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBoletoDataResult" type="tns:BoletoDataResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BoletoDataResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AbstractResponse">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="BraspagTransactionId" type="s1:guid" />
+              <s:element minOccurs="1" maxOccurs="1" name="PaymentMethod" type="s:short" />
+              <s:element minOccurs="0" maxOccurs="1" name="DocumentNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DocumentDate" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CustomerName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BoletoNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BarCodeNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BoletoExpirationDate" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BoletoInstructions" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BoletoType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BoletoUrl" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:long" />
+              <s:element minOccurs="1" maxOccurs="1" name="PaidAmount" type="s:long" />
+              <s:element minOccurs="0" maxOccurs="1" name="PaymentDate" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BankNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Agency" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Account" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Assignor" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetBraspagOrderId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="braspagOrderIdDataRequest" type="tns:BraspagOrderIdDataRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BraspagOrderIdDataRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AbstractRequest">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="MerchantId" type="s1:guid" />
+              <s:element minOccurs="1" maxOccurs="1" name="BraspagTransactionId" type="s1:guid" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetBraspagOrderIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBraspagOrderIdResult" type="tns:BraspagOrderIdDataResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BraspagOrderIdDataResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AbstractResponse">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="BraspagOrderId" nillable="true" type="s1:guid" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetOrderIdData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="orderIdDataRequest" type="tns:OrderIdDataRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="OrderIdDataRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AbstractRequest">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="MerchantId" type="s1:guid" />
+              <s:element minOccurs="0" maxOccurs="1" name="OrderId" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetOrderIdDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrderIdDataResult" type="tns:OrderIdDataResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="OrderIdDataResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AbstractResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="OrderIdDataCollection" type="tns:ArrayOfOrderIdTransactionResponse" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfOrderIdTransactionResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OrderIdTransactionResponse" nillable="true" type="tns:OrderIdTransactionResponse" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OrderIdTransactionResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AbstractResponse">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="BraspagOrderId" type="s1:guid" />
+              <s:element minOccurs="0" maxOccurs="1" name="BraspagTransactionId" type="tns:ArrayOfGuid" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfGuid">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="guid" type="s1:guid" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetOrderDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrderData" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrderDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTransactionData" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTransactionDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomerDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCustomerData" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomerDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCustomerDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditCardDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCreditCardData" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditCardDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCreditCardDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAdditionalDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAdditionalData" />
+  </wsdl:message>
+  <wsdl:message name="GetAdditionalDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAdditionalDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDeliveryAddressDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDeliveryAddressData" />
+  </wsdl:message>
+  <wsdl:message name="GetDeliveryAddressDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDeliveryAddressDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBoletoDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBoletoData" />
+  </wsdl:message>
+  <wsdl:message name="GetBoletoDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBoletoDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBraspagOrderIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBraspagOrderId" />
+  </wsdl:message>
+  <wsdl:message name="GetBraspagOrderIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBraspagOrderIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderIdDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrderIdData" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderIdDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrderIdDataResponse" />
+  </wsdl:message>
+  <wsdl:portType name="PagadorQuerySoap">
+    <wsdl:operation name="GetOrderData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get the Order Data using the new Pagador plataform.</wsdl:documentation>
+      <wsdl:input message="tns:GetOrderDataSoapIn" />
+      <wsdl:output message="tns:GetOrderDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get the Transaction Data using the new Pagador plataform.</wsdl:documentation>
+      <wsdl:input message="tns:GetTransactionDataSoapIn" />
+      <wsdl:output message="tns:GetTransactionDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get the Customer Data using the new Pagador plataform.</wsdl:documentation>
+      <wsdl:input message="tns:GetCustomerDataSoapIn" />
+      <wsdl:output message="tns:GetCustomerDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditCardData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get the CreditCard Data using the new Pagador plataform.</wsdl:documentation>
+      <wsdl:input message="tns:GetCreditCardDataSoapIn" />
+      <wsdl:output message="tns:GetCreditCardDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAdditionalData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get the Additional Data using the new Pagador plataform.</wsdl:documentation>
+      <wsdl:input message="tns:GetAdditionalDataSoapIn" />
+      <wsdl:output message="tns:GetAdditionalDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryAddressData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get the Delivery Address Data from an order using the new Pagador plataform.</wsdl:documentation>
+      <wsdl:input message="tns:GetDeliveryAddressDataSoapIn" />
+      <wsdl:output message="tns:GetDeliveryAddressDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBoletoData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get the Boleto Data using the new Pagador plataform.</wsdl:documentation>
+      <wsdl:input message="tns:GetBoletoDataSoapIn" />
+      <wsdl:output message="tns:GetBoletoDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBraspagOrderId">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get the BraspagOrderId using the new Pagador plataform.</wsdl:documentation>
+      <wsdl:input message="tns:GetBraspagOrderIdSoapIn" />
+      <wsdl:output message="tns:GetBraspagOrderIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderIdData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get the collection of BraspagOrderId with nested BraspagTransactionIds associated to an MerchantOrderId using the new Pagador plataform.</wsdl:documentation>
+      <wsdl:input message="tns:GetOrderIdDataSoapIn" />
+      <wsdl:output message="tns:GetOrderIdDataSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="PagadorQueryHttpGet" />
+  <wsdl:portType name="PagadorQueryHttpPost" />
+  <wsdl:binding name="PagadorQuerySoap" type="tns:PagadorQuerySoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetOrderData">
+      <soap:operation soapAction="https://www.pagador.com.br/query/pagadorquery/GetOrderData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionData">
+      <soap:operation soapAction="https://www.pagador.com.br/query/pagadorquery/GetTransactionData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerData">
+      <soap:operation soapAction="https://www.pagador.com.br/query/pagadorquery/GetCustomerData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditCardData">
+      <soap:operation soapAction="https://www.pagador.com.br/query/pagadorquery/GetCreditCardData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAdditionalData">
+      <soap:operation soapAction="https://www.pagador.com.br/query/pagadorquery/GetAdditionalData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryAddressData">
+      <soap:operation soapAction="https://www.pagador.com.br/query/pagadorquery/GetDeliveryAddressData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBoletoData">
+      <soap:operation soapAction="https://www.pagador.com.br/query/pagadorquery/GetBoletoData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBraspagOrderId">
+      <soap:operation soapAction="https://www.pagador.com.br/query/pagadorquery/GetBraspagOrderId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderIdData">
+      <soap:operation soapAction="https://www.pagador.com.br/query/pagadorquery/GetOrderIdData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PagadorQuerySoap12" type="tns:PagadorQuerySoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetOrderData">
+      <soap12:operation soapAction="https://www.pagador.com.br/query/pagadorquery/GetOrderData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionData">
+      <soap12:operation soapAction="https://www.pagador.com.br/query/pagadorquery/GetTransactionData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerData">
+      <soap12:operation soapAction="https://www.pagador.com.br/query/pagadorquery/GetCustomerData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditCardData">
+      <soap12:operation soapAction="https://www.pagador.com.br/query/pagadorquery/GetCreditCardData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAdditionalData">
+      <soap12:operation soapAction="https://www.pagador.com.br/query/pagadorquery/GetAdditionalData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryAddressData">
+      <soap12:operation soapAction="https://www.pagador.com.br/query/pagadorquery/GetDeliveryAddressData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBoletoData">
+      <soap12:operation soapAction="https://www.pagador.com.br/query/pagadorquery/GetBoletoData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBraspagOrderId">
+      <soap12:operation soapAction="https://www.pagador.com.br/query/pagadorquery/GetBraspagOrderId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderIdData">
+      <soap12:operation soapAction="https://www.pagador.com.br/query/pagadorquery/GetOrderIdData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PagadorQueryHttpGet" type="tns:PagadorQueryHttpGet">
+    <http:binding verb="GET" />
+  </wsdl:binding>
+  <wsdl:binding name="PagadorQueryHttpPost" type="tns:PagadorQueryHttpPost">
+    <http:binding verb="POST" />
+  </wsdl:binding>
+  <wsdl:service name="PagadorQuery">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This webservice returns PAGADOR informations</wsdl:documentation>
+    <wsdl:port name="PagadorQuerySoap" binding="tns:PagadorQuerySoap">
+      <soap:address location="https://homologacao.pagador.com.br/services/pagadorquery.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PagadorQuerySoap12" binding="tns:PagadorQuerySoap12">
+      <soap12:address location="https://homologacao.pagador.com.br/services/pagadorquery.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PagadorQueryHttpGet" binding="tns:PagadorQueryHttpGet">
+      <http:address location="https://homologacao.pagador.com.br/services/pagadorquery.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PagadorQueryHttpPost" binding="tns:PagadorQueryHttpPost">
+      <http:address location="https://homologacao.pagador.com.br/services/pagadorquery.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
