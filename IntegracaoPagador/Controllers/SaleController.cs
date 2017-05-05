@@ -26,11 +26,15 @@ namespace IntegracaoPagador.Controllers
         const string baseURL = "https://apihomolog.braspag.com.br/v2/sales";
         const string baseURLSearch = "https://apiqueryhomolog.braspag.com.br/v2/sales/";
 
-        private readonly ISoapRequestService _soapRequestService;
+        public readonly ISoapRequestService SoapRequestService;
         public SaleController(ISoapRequestService soapService)
         {
-            _soapRequestService = soapService;
+            if (soapService == null)
+                throw new ArgumentNullException(nameof(soapService));
+            
+            SoapRequestService = soapService;
         }
+
         // GET: Sale
         public ActionResult Index()
         {
@@ -50,48 +54,8 @@ namespace IntegracaoPagador.Controllers
                 switch (sale.TypeSend)
                 {
                     case TypeSendEnum.SOAP:
-                        //var soapSendRequestMessage = new AuthorizeTransactionRequest();
-                        //soapSendRequestMessage.Version = "v1.0";
-                        //soapSendRequestMessage.RequestId = Guid.NewGuid();
-                        //soapSendRequestMessage.OrderData = new OrderDataRequest
-                        //{
-                        //    MerchantId = new Guid(ConfigurationManager.AppSettings["merchantId"]),
-                        //    OrderId = CreateMercharOrderId()
-                        //};
-
-                        //soapSendRequestMessage.CustomerData = new CustomerDataRequest
-                        //{
-                        //    CustomerName = sale.CustomerName
-                        //};
-
-                        //soapSendRequestMessage.PaymentDataCollection = new PaymentDataRequest[1];
-                        //var payment = new CreditCardDataRequest
-                        //{
-                        //    CardNumber = sale.CreditCardCardNumber,
-                        //    Amount = sale.PaymentAmount,
-                        //    CardExpirationDate = sale.CreditCardExpirationDate,
-                        //    CardHolder = sale.CreditCardHolder,
-                        //    CardSecurityCode = sale.CreditCardSecurityCode,
-                        //    PaymentMethod = 997,
-                        //    Currency = "BRL",
-                        //    Country = "BRA",
-                        //    NumberOfPayments = (short)(sale.PaymentInstallments),
-                        //    PaymentPlan = 0,
-                        //    TransactionType = 1
-                        //};
-                        //soapSendRequestMessage.PaymentDataCollection[0] = payment;
-
-                        ////var soapResponse = new PagadorTransactionSoapClient().AuthorizeTransaction(soapSendRequestMessage);
-                        //var soapResponse = await new PagadorTransactionSoapClient().AuthorizeTransactionAsync(soapSendRequestMessage);
-
-                        //responseObject = new ResponseRequest
-                        //{
-                        //    PaymentId = soapResponse.PaymentDataCollection[0].BraspagTransactionId
-                        //};
-
-                        
                         responseObject = await
-                            _soapRequestService.AuthorizeTransactionSoap(sale, CreateMercharOrderId());
+                            SoapRequestService.AuthorizeTransactionSoap(sale, CreateMercharOrderId());
                         break;
                     case TypeSendEnum.REST:
                         sale.MerchantOrderId = CreateMercharOrderId();
@@ -122,11 +86,9 @@ namespace IntegracaoPagador.Controllers
 
                 return View("Index", responseObject);
             }
-            else
 
-            {
-                return View("SaleProduct", sale);
-            }
+            return View("SaleProduct", sale);
+            
         }
 
         public async Task<ActionResult> Search(ResponseRequest sale)
@@ -278,7 +240,7 @@ namespace IntegracaoPagador.Controllers
             }
         }
 
-        private string CreateMercharOrderId()
+        public string CreateMercharOrderId()
         {
             StringBuilder strbld = new StringBuilder(100);
             Random random = new Random();
