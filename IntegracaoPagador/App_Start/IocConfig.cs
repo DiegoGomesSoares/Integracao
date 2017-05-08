@@ -17,6 +17,16 @@ namespace IntegracaoPagador.App_Start
 
             kernel.Bind<ISoapRequestService>().To<SoapRequestService>();
 
+            kernel.Bind<IRestRequestService>().To<RestRequestService>();
+
+            kernel.Bind<IRestSearchService>().To<RestSearchService>();
+
+            kernel.Bind<IPagadorSoapSearchClientWrapper>().To<PagadorSoapSearchClientWrapper>();
+
+            kernel.Bind<ISoapSearchService>().To<SoapSearchService>();
+
+            kernel.Bind<IRestSearchServiceWrapper>().To<RestSearchServiceWrapper>();
+
             DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }
     }

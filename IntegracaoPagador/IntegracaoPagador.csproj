@@ -174,7 +174,7 @@
     <Compile Include="Models\Merchant.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Response.cs" />
-    <Compile Include="Models\ResponseRest.cs" />
+    <Compile Include="Models\ResponseObject.cs" />
     <Compile Include="Models\RestSend.cs" />
     <Compile Include="Models\SaleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -184,9 +184,19 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Service\IPagadorSoapClientWrapper.cs" />
+    <Compile Include="Service\IPagadorSoapSearchClientWrapper.cs" />
+    <Compile Include="Service\IRestRequestService.cs" />
+    <Compile Include="Service\IRestSearchService.cs" />
+    <Compile Include="Service\IRestSearchServiceWrapper.cs" />
     <Compile Include="Service\ISoapRequestService.cs" />
+    <Compile Include="Service\ISoapSearchService.cs" />
     <Compile Include="Service\PagadorSoapClientWrapper.cs" />
+    <Compile Include="Service\PagadorSoapSearchClientWrapper.cs" />
+    <Compile Include="Service\RestRequestService.cs" />
+    <Compile Include="Service\RestSearchService.cs" />
+    <Compile Include="Service\RestSearchServiceWrapper.cs" />
     <Compile Include="Service\SoapRequestService.cs" />
+    <Compile Include="Service\SoapSearchService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Connected Services\PagadorSoapSearch\IntegracaoPagador.PagadorSoapSearch.AdditionalDataResponse.datasource">

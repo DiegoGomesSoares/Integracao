@@ -7,7 +7,7 @@ using System.Web;
 
 namespace IntegracaoPagador.Models
 {
-    public class ResponseRequest
+    public class ResponseViewModel
     {
         [Required]
         public Guid PaymentId { get; set; }

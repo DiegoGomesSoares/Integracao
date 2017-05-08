@@ -5,6 +5,6 @@ namespace IntegracaoPagador.Service
 {
     public interface ISoapRequestService
     {
-        Task<ResponseRequest> AuthorizeTransactionSoap(SaleViewModel sale, string merchantOrderId);
+        Task<ResponseViewModel> AuthorizeTransaction(SaleViewModel sale, string merchantOrderId);
     }
 }

@@ -11,13 +11,13 @@ namespace IntegracaoPagador.Service
 {
     public class SoapRequestService: ISoapRequestService
     {
-        private readonly IPagadorSoapClientWrapper _pagadorTransactionWrapper;
+        public readonly IPagadorSoapClientWrapper PagadorTransactionWrapper;
 
         public SoapRequestService(IPagadorSoapClientWrapper pagadorTransaction)
         {
-            _pagadorTransactionWrapper = pagadorTransaction;
+            PagadorTransactionWrapper = pagadorTransaction;
         }
-        public async Task<ResponseRequest> AuthorizeTransactionSoap(SaleViewModel sale, string merchantOrderId)
+        public async Task<ResponseViewModel> AuthorizeTransaction(SaleViewModel sale, string merchantOrderId)
         {
             var soapSendRequestMessage = new AuthorizeTransactionRequest();
             soapSendRequestMessage.Version = "v1.0";
@@ -51,9 +51,9 @@ namespace IntegracaoPagador.Service
             soapSendRequestMessage.PaymentDataCollection[0] = payment;
             
             var soapResponse =
-                await _pagadorTransactionWrapper.AuthorizeTransactionAsync(soapSendRequestMessage);
+                await PagadorTransactionWrapper.AuthorizeTransactionAsync(soapSendRequestMessage);
 
-            var responseObject = new ResponseRequest
+            var responseObject = new ResponseViewModel
             {
                 PaymentId = soapResponse.PaymentDataCollection[0].BraspagTransactionId
             };

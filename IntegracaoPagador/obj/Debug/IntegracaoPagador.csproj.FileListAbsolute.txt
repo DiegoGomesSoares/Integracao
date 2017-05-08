@@ -59,7 +59,6 @@ C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\Antlr3.Runtime.pdb
 C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\Newtonsoft.Json.xml
 C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\Microsoft.ApplicationInsights.xml
 C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\Microsoft.AI.DependencyCollector.xml
-C:\TFS\IntegracaoPagador\IntegracaoPagador\obj\Debug\IntegracaoPagador.csprojResolveAssemblyReference.cache
 C:\TFS\IntegracaoPagador\IntegracaoPagador\obj\Debug\IntegracaoPagador.dll
 C:\TFS\IntegracaoPagador\IntegracaoPagador\obj\Debug\IntegracaoPagador.pdb
 C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\AutoMapper.dll
@@ -69,3 +68,4 @@ C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\System.Net.Http.Formatting.dll
 C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\System.Net.Http.Formatting.xml
 C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\Ninject.dll
 C:\TFS\IntegracaoPagador\IntegracaoPagador\bin\Ninject.xml
+C:\TFS\IntegracaoPagador\IntegracaoPagador\obj\Debug\IntegracaoPagador.csprojResolveAssemblyReference.cache

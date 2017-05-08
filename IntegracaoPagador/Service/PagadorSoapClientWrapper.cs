@@ -13,7 +13,7 @@ namespace IntegracaoPagador.Service
 
         public PagadorSoapClientWrapper()
         {
-            this._pagadorTransactionSoapClient = new PagadorTransactionSoapClient();
+            _pagadorTransactionSoapClient = new PagadorTransactionSoapClient();
         }
 
         public Task<AuthorizeTransactionResponse> AuthorizeTransactionAsync(AuthorizeTransactionRequest request)

@@ -2,38 +2,44 @@
 using System.Configuration;
 using System.Text;
 using System.Web.Mvc;
-using AutoMapper;
 using IntegracaoPagador.Models;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using IntegracaoPagador.Models.Enums;
 using IntegracaoPagador.PagadorSoapSearch;
 using IntegracaoPagador.Service;
-using IntegracaoPagador.SoapReference;
-using CreditCardDataRequest = IntegracaoPagador.SoapReference.CreditCardDataRequest;
-using CustomerDataRequest = IntegracaoPagador.SoapReference.CustomerDataRequest;
-using OrderDataRequest = IntegracaoPagador.SoapReference.OrderDataRequest;
 using TransactionDataRequest = IntegracaoPagador.PagadorSoapSearch.TransactionDataRequest;
 
 namespace IntegracaoPagador.Controllers
 {
     public class SaleController : Controller
     {
-
-        const string baseURL = "https://apihomolog.braspag.com.br/v2/sales";
-        const string baseURLSearch = "https://apiqueryhomolog.braspag.com.br/v2/sales/";
-
         public readonly ISoapRequestService SoapRequestService;
-        public SaleController(ISoapRequestService soapService)
+        public readonly IRestRequestService RestRequestService;
+        public readonly IRestSearchService SearchRestService;
+        public readonly ISoapSearchService SearchSoapService;
+        public readonly IRestSearchServiceWrapper RestSerchServiceWrapper;
+
+        public SaleController(ISoapRequestService soapService, IRestRequestService resquestService,IRestSearchService searchRestSearchService,
+            ISoapSearchService searchSoapService, IRestSearchServiceWrapper restSerchServiceWrapper)
         {
             if (soapService == null)
                 throw new ArgumentNullException(nameof(soapService));
-            
+            if (resquestService == null)
+                throw new ArgumentNullException(nameof(resquestService));
+            if (searchRestSearchService == null)
+                throw new ArgumentNullException(nameof(searchRestSearchService));
+            if (searchSoapService == null)
+                throw new ArgumentNullException(nameof(searchSoapService));
+            if (restSerchServiceWrapper == null)
+                throw new ArgumentNullException(nameof(searchSoapService));
+
             SoapRequestService = soapService;
+            RestRequestService = resquestService;
+            SearchRestService = searchRestSearchService;
+            SearchSoapService = searchSoapService;
+            RestSerchServiceWrapper = restSerchServiceWrapper;
         }
+        
 
         // GET: Sale
         public ActionResult Index()
@@ -50,35 +56,16 @@ namespace IntegracaoPagador.Controllers
         {
             if (ModelState.IsValid)
             {
-                ResponseRequest responseObject;
+                ResponseViewModel responseObject;
                 switch (sale.TypeSend)
                 {
                     case TypeSendEnum.SOAP:
                         responseObject = await
-                            SoapRequestService.AuthorizeTransactionSoap(sale, CreateMercharOrderId());
+                            SoapRequestService.AuthorizeTransaction(sale, CreateMercharOrderId());
                         break;
                     case TypeSendEnum.REST:
                         sale.MerchantOrderId = CreateMercharOrderId();
-
-                        var restSend = new RestSend
-                        {
-                            MerchantOrderId = sale.MerchantOrderId,
-                            Payment = Mapper.Map<Payment>(sale),
-                            Customer = Mapper.Map<Customer>(sale),
-                        };
-
-                        restSend.Payment.CreditCard = Mapper.Map<CreditCard>(sale);
-
-                        var restSendJsonMessage = JsonConvert.SerializeObject(restSend, new StringEnumConverter());
-
-                        var responseRestJson = await SendPostRestMessage(restSendJsonMessage);
-
-                        var responseJsonObject =
-                            JsonConvert.DeserializeObject<ResponseRest>(responseRestJson);
-                        responseObject = new ResponseRequest
-                        {
-                            PaymentId = new Guid(responseJsonObject.Payment.PaymentId)
-                        };
+                        responseObject = await RestRequestService.AuthorizeTransaction(sale);
                         break;
                     default:
                         throw new Exception("Type send not match!");
@@ -91,153 +78,25 @@ namespace IntegracaoPagador.Controllers
             
         }
 
-        public async Task<ActionResult> Search(ResponseRequest sale)
+        public async Task<ActionResult> Search(ResponseViewModel sale)
         {
-            var responseObject = new ResponseRest();
+            var responseObject = new ResponseObject();
 
             switch (sale.TypeSend)
             {
                 case TypeSendEnum.SOAP:
-
-                    var clientSearchTransactionDataMessage = new PagadorSoapSearch.TransactionDataRequest()
-                    {
-                        BraspagTransactionId = sale.PaymentId,
-                        MerchantId = new Guid(ConfigurationManager.AppSettings["merchantId"]),
-                        Version = "1.0",
-                        RequestId = Guid.NewGuid()
-                    };
-                   
-
-                    var clientSeachCreditCard = new PagadorSoapSearch.CreditCardDataRequest()
-                    {
-                        BraspagTransactionId = sale.PaymentId,
-                        MerchantId = new Guid(ConfigurationManager.AppSettings["merchantId"]),
-                        Version = "1.0",
-                        RequestId = Guid.NewGuid()
-                    };
                     
+                    responseObject = await SearchSoapService.Search(sale);
 
-                    var soapResponseTransactionData = new PagadorQuerySoapClient().GetTransactionData(clientSearchTransactionDataMessage);
-
-                    var soapResponseCreditCard = new PagadorQuerySoapClient().GetCreditCardData(clientSeachCreditCard);
-
-                    var clientSearchBrasPagOrderId = new BraspagOrderIdDataRequest(){
-                      
-                        MerchantId = new Guid(ConfigurationManager.AppSettings["merchantId"]),
-                        Version = "1.0",
-                        RequestId = Guid.NewGuid(),
-                        BraspagTransactionId = soapResponseTransactionData.BraspagTransactionId
-                    };
-
-                    var soapResponseBrasPagOrderId = new PagadorQuerySoapClient().GetBraspagOrderId(clientSearchBrasPagOrderId);
-
-                    var clientSearchCustomer = new PagadorSoapSearch.CustomerDataRequest()
-                    {
-                        BraspagOrderId = soapResponseBrasPagOrderId.BraspagOrderId.Value,
-                        MerchantId = new Guid(ConfigurationManager.AppSettings["merchantId"]),
-                        Version = "1.0",
-                        RequestId = Guid.NewGuid()
-                    };
-
-                    var soapResponseCustomer =
-                        new PagadorQuerySoapClient().GetCustomerData(clientSearchCustomer);
-
-                    ProviderEnum provider;
-                     Enum.TryParse(soapResponseTransactionData.PaymentMethodName, true, out provider);
-
-                    responseObject.Payment = new Payment()
-                    {
-                        Amount = soapResponseTransactionData.Amount,
-                        Installments = soapResponseTransactionData.NumberOfPayments,
-                        PaymentId = soapResponseTransactionData.BraspagTransactionId.ToString(),
-                        Provider = provider
-                      
-                    };
-
-                    responseObject.Payment.CreditCard = new CreditCard()
-                    {
-                        CardNumber = soapResponseCreditCard.CardNumber,
-                        ExpirationDate = soapResponseCreditCard.CardExpirationDate,
-                        Holder = soapResponseCreditCard.CardHolder
-                    };
-                    
-                    responseObject.Customer = new Customer()
-                    {
-                        Name = soapResponseCustomer.CustomerName
-                    };
-                    
                     break;
                 case TypeSendEnum.REST:
-                    var responseRestJson = await SendPostRestSearchMessage(sale.PaymentId.ToString());
-
-                    responseObject =
-                        JsonConvert.DeserializeObject<ResponseRest>(responseRestJson, new StringEnumConverter());
+                    responseObject = await SearchRestService.Search(sale.PaymentId.ToString());
                     break;
                 default:
                     throw  new Exception("Type send not match!");
             }
 
             return View("SearchSale", responseObject);
-        }
-
-        private async Task<string> SendPostRestSearchMessage(string paymentId)
-        {
-            var client = new HttpClient {BaseAddress = new Uri(baseURLSearch)};
-
-            var contentType = "application/json";
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
-
-            var merchantId = ConfigurationManager.AppSettings["merchantId"];
-            client.DefaultRequestHeaders.Add("MerchantId", merchantId);
-
-            var merchantKey = ConfigurationManager.AppSettings["merchantKey"];
-            client.DefaultRequestHeaders.Add("MerchantKey", merchantKey);
-
-         
-            var response = await client.GetAsync(paymentId);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-
-                return content;
-            }
-            else
-            {
-                throw  new Exception();
-            }
-
-        }
-
-        private async Task<string> SendPostRestMessage(string body)
-        {
-
-            var client = new HttpClient {BaseAddress = new Uri(baseURL)};
-
-            var contentType = "application/json";
-
-            var merchantId = ConfigurationManager.AppSettings["merchantId"];
-            client.DefaultRequestHeaders.Add("MerchantId", merchantId);
-
-            var merchantKey = ConfigurationManager.AppSettings["merchantKey"];
-            client.DefaultRequestHeaders.Add("MerchantKey", merchantKey);
-            
-            var bodySend = new StringContent(body);
-            
-            bodySend.Headers.ContentType = new MediaTypeHeaderValue(contentType);
-        
-            var response = await client.PostAsync(baseURL, bodySend);
-            
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-
-                return content;
-            }
-            else
-            {
-                throw new Exception();
-            }
         }
 
         public string CreateMercharOrderId()
